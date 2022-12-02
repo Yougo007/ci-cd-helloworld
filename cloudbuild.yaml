@@ -1,0 +1,18 @@
+timeouts: 1200
+substitutions:
+  PROJECTID: yougo-k8-hardway-256417
+
+steps:
+- name: 'gcr.io/k8s-skaffold/pack'
+  entrypoint: 'pack'
+  args: ['build', '--builder=gcr.io/buildpacks/builder', '--publish', 'us-west1-docker.pkg.dev/$PROJECTID/yougo:-repo/hello-world:$SHORT_SHA']
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - > 
+    gcloud deploy releases create release-$BUILD_ID
+    --delivery-pipeline=hello-world-app
+    --region=us-west1
+    --source=./
+    --images=hello-world-app=us-west1-docker.pkg.dev/$PROJECTID/my-docker-repo/hello-world:$SHORT_SHA 
