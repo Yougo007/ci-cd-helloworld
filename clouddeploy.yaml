@@ -16,7 +16,7 @@ metadata:
   name: staging
 description: Staging Environment
 gke:
-  cluster: projects/cloud-deploy-example/locations/us-central1/clusters/staging
+  cluster: projects/yougo-dev-369515/locations/us-west1/clusters/ugo-dev-cluster
 
 ---
 apiVersion: deploy.cloud.google.com/v1beta1
@@ -25,4 +25,4 @@ metadata:
   name: production
 description: Production Environment
 gke:
-  cluster: projects/cloud-deploy-example/locations/us-central1/clusters/production
+  cluster: projects/yougo-prod-369515/locations/us-west1/clusters/ugo-prod-cluster
